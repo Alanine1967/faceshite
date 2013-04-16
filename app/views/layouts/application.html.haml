@@ -9,6 +9,8 @@
 		%header
 			%h1 faceshite
 		%section
+			- flash.each do |key, value|
+				.flash= value
 			= yield
 		%footer
 			%p some footer text

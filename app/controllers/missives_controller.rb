@@ -1,7 +1,12 @@
 class MissivesController < ApplicationController
 	before_filter :find_missive, only: [:show, :edit, :update, :destroy]
 
-	def show; end
+	def show
+	end
+
+	def index
+		@missives = Missive.all
+	end
 
 	def new
 		@missive = Missive.new
@@ -14,6 +19,22 @@ class MissivesController < ApplicationController
 		else
 			render action: :new, alert: "Creation failed!"
 		end
+	end
+
+	def edit
+	end
+
+	def update
+		if @missive.update(missive_params)
+			redirect_to @missive, notice: "Successfully updated!"
+		else
+			render action: :edit, alert: "Update failed!"
+		end
+	end
+
+	def destroy
+		@missive.destroy
+		redirect_to missives_path, notice: "Missive deleted!"
 	end
 
 	private
