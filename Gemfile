@@ -7,6 +7,7 @@ gem 'jbuilder', '~> 1.0.1'
 gem 'haml-rails'
 gem 'thin'
 gem 'pg'
+gem 'bcrypt-ruby'
 
 group :assets do
   gem 'sass-rails',   '~> 4.0.0.beta1'
@@ -15,7 +16,7 @@ group :assets do
 end
 
 group :test do
-	gem 'capybara', '2.1.0.beta1'
+	gem 'capybara', '2.1'
 	gem 'selenium-webdriver'
 end
 

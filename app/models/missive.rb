@@ -7,7 +7,9 @@
 #  content    :text
 #  created_at :datetime
 #  updated_at :datetime
+#  user_id    :integer
 #
 
 class Missive < ActiveRecord::Base
+	validates :title, :content, presence: true
 end

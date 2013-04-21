@@ -1,7 +1,12 @@
 Faceshite::Application.routes.draw do
-  root to: "static_pages#home"
-  get "static_pages/contact"
-  get "static_pages/help"
-  get "static_pages/about"
+  get 'signup', to: 'users#new', as: 'signup'
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+  get 'contact', to: "static_pages#contact", as: 'contact'
+  get 'help', to: "static_pages#help", as: 'help'
+  get 'about', to: "static_pages#about", as: 'about'
   resources :missives
+  resources :sessions
+  resources :users
+  root to: "static_pages#home"
 end

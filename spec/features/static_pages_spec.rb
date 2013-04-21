@@ -1,12 +1,24 @@
 require 'spec_helper.rb'
 
-describe "Static pages" do
-	let(:title) { "Faceshite |" }
+feature "Static pages should have appropriate title" do
 
-	describe "Home page" do
-		before(:each) { visit root_path }
-		it "should have 'home' in the title" do
-			page.should have_title "Faceshite | Home"
-		end
+	scenario "Home page" do
+		visit '/'
+		page.should have_title "Faceshite | Home"
+	end
+
+	scenario "About page" do
+		visit '/about'
+		page.should have_title "Faceshite | About"
+	end
+
+	scenario "Contact page" do
+		visit '/contact'
+		page.should have_title "Faceshite | Contact"
+	end
+
+	scenario "Help page" do
+		visit '/help'
+		page.should have_title "Faceshite | Help"
 	end
 end
