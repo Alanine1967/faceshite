@@ -1,0 +1,4 @@
+%h1 List all Users
+
+- @users.each do |user|
+	= link_to "#{user.first_name} #{user.surname}", user_path(user)

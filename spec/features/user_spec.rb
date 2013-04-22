@@ -12,7 +12,7 @@ feature "signup" do
 	end
 
 	scenario "signup with legal data" do
-		click_button "Sign Up"
+		expect { click_button "Sign Up" }.to change(User, :count).by(1)
 		expect(current_path).to eql root_path
 	end
 
@@ -58,5 +58,30 @@ feature "login/logout" do
 	scenario "logged in user should be able to logout" do
 		click_link "Log Out"
 		expect(page).to have_content "Logged out"
+	end
+end
+
+feature "editing user record" do
+	scenario "edit a user record" do
+		user = FactoryGirl.create(:user)
+		visit user_path(user)
+		click_link "Edit"
+		expect(current_path).to eql edit_user_path(user)
+		fill_in "Surname", with: "Tebbit"
+		fill_in "Password", with: user.password
+		fill_in "Password confirmation", with: user.password_confirmation
+		click_button "Update user"
+		expect(current_path).to eql user_path(user)
+		expect(page).to have_content "User updated"
+		expect(User.find(user).surname).to eql "Tebbit"
+	end
+end
+
+feature "deleting user records" do
+	scenario "delete a user record" do
+		@user = FactoryGirl.create(:user)
+		visit user_path(@user)
+		expect(current_path).to eql user_path(@user)
+		expect { click_link "Delete" }.to change(User, :count).by(-1)
 	end
 end
