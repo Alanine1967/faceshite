@@ -2,3 +2,4 @@
 
 - @users.each do |user|
 	= link_to "#{user.first_name} #{user.surname}", user_path(user)
+	= link_to "Add as an acquaintance", relationships_path(relationship_id: user)

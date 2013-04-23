@@ -15,4 +15,6 @@ class User < ActiveRecord::Base
 	has_secure_password
 	validates :email, :password_digest, :first_name, :surname, presence: true
 	validates :password, length: { minimum: 6 }
+	has_many :relationships
+	has_many :acquaintances, through: :relationships
 end

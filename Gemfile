@@ -26,3 +26,4 @@ group :development, :test do
 	gem 'parallel_tests'
 	gem 'zeus-parallel_tests'
 end
+ruby "2.0.0"

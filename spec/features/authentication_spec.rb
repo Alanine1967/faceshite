@@ -40,7 +40,7 @@ feature "login/logout" do
 
 	scenario "displays the user's email after successful login" do
 		login
-		expect(current_path).to eql root_path
+		expect(current_path).to eql user_path(@user)
 		expect(page).to have_selector(".user_email", text: @user.email)
 	end
 

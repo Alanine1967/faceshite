@@ -42,6 +42,7 @@ feature 'CRUD actions' do
 
 	scenario 'can edit a missive' do
 		login
+		visit '/'
 		click_link 'View missives'
 		click_link @missive.title
 		click_link 'edit'
