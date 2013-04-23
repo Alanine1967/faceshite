@@ -1,26 +1,22 @@
 require 'spec_helper'
 
-feature 'Restful actions' do
+feature 'CRUD actions' do
+
 	before(:each) do
-		user = FactoryGirl.create(:user)
 		@missive = FactoryGirl.create(:missive)
 		visit '/'
-		click_link 'Log In'
-		fill_in 'email', with: user.email
-		fill_in 'password', with: user.password
-		click_button 'Log In'
-		click_link 'View missives'
 	end
 
 	scenario 'can create a missive with correct data' do
+		click_link 'View missives'
 		click_link 'Create a new missive'
 		fill_in 'Title', with: @missive.title
 		fill_in 'Content', with: @missive.content
-		click_button 'Create Missive'
-		expect(current_path).to eql missive_path(Missive.last)
+		expect { click_button 'Create Missive' }.to change(Missive, :count).by(1)
 	end
 
 	scenario 'cannnot create missive without content' do
+		click_link 'View missives'
 		click_link 'Create a new missive'
 		fill_in 'Title', with: ""
 		fill_in 'Content', with: ""
@@ -31,18 +27,22 @@ feature 'Restful actions' do
 	end
 
 	scenario 'can list missives' do
+		click_link 'View missives'
 		expect(page.current_url).to eql(missives_url)
 		expect(page).to have_content @missive.title
 		expect(page).to have_content @missive.content
 	end
 
 	scenario 'can show a missive' do
+		click_link 'View missives'
 		click_link @missive.title
 		expect(page.current_url).to eql(missive_url(@missive))
 		expect(page).to have_content @missive.content
 	end
 
 	scenario 'can edit a missive' do
+		login
+		click_link 'View missives'
 		click_link @missive.title
 		click_link 'edit'
 		expect(page.current_url).to eql(edit_missive_url(@missive))
@@ -53,6 +53,7 @@ feature 'Restful actions' do
 	end
 
 	scenario 'can delete a missive' do
+		click_link 'View missives'
 		click_link @missive.title
 		click_link 'delete'
 		expect(page.current_url).to eql(missives_url)

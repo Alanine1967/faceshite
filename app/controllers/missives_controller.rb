@@ -35,7 +35,7 @@ class MissivesController < ApplicationController
 
 	def destroy
 		@missive.destroy
-		redirect_to missives_path, notice: "Missive deleted!"
+		redirect_to missives_url, notice: "Missive deleted!"
 	end
 
 	private

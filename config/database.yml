@@ -17,7 +17,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: faceshite_test
+  database: faceshite_test<%= ENV['TEST_ENV_NUMBER'] %>
   pool: 5
   username: postgres
   password: 
