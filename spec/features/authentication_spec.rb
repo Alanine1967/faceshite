@@ -5,7 +5,7 @@ feature "signup" do
 	scenario "signup with legal data" do
 		signup
 		expect { click_button "Sign Up" }.to change(User, :count).by(1)
-		expect(current_path).to eql root_path
+		expect(current_path).to eql user_path(User.last)
 	end
 
 	scenario "signup without first name or surname should fail" do

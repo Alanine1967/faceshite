@@ -22,3 +22,11 @@ feature "editing/deleting user records" do
 		expect { click_link "Delete" }.to change(User, :count).by(-1)
 	end
 end
+
+feature "show users" do
+	before(:each) { @user = FactoryGirl.create(:user) }
+	scenario "show all but current user" do
+		visit '/users'
+		expect(page).to have_no_content(@user.surname)
+	end
+end
