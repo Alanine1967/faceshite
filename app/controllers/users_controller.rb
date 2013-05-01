@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 	before_filter :find_user, only: [:show, :edit, :update, :destroy]
 
 	def show
+		@acquaintances = @user.acquaintances
 	end
 
 	def index

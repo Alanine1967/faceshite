@@ -1,5 +1,9 @@
 class RelationshipsController < ApplicationController
 
+	def index
+		@acquaintances = current_user.acquaintances
+	end
+
   def create
   	@relationship = current_user.relationships.build(acquaintance_id: params[:acquaintance_id])
   	if @relationship.save

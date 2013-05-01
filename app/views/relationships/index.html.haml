@@ -1,0 +1,4 @@
+%h1 Acquaintances
+= link_to "back", user_path(current_user)
+- @acquaintances.each do |acquaintance|
+	= "#{acquaintance.first_name} #{acquaintance.surname}"
