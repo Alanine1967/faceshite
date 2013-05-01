@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 	end
 
 	def index
-		@users = User.all
+		@users = User.where.not(id: current_user)
 	end
 
 	def new
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 			session[:user_id] = @user.id
 			redirect_to user_url(@user), notice: "Thank you for signing up!"
 		else
-			render "new"
+			render 'static_pages/home'
 		end
 	end
 

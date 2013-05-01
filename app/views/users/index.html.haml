@@ -1,5 +1,7 @@
 %h1 List all Users
 
+= link_to "Log Out", session_path(current_user), method: :delete, data: { notice: "Logged out" }
+
 - @users.each do |user|
 	= link_to "#{user.first_name} #{user.surname}", user_path(user)
-	= link_to "Add as an acquaintance", relationship_create_path
+	= link_to "Add as an acquaintance", relationships_path(acquaintance_id: user), method: :post

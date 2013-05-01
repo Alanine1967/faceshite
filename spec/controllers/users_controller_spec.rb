@@ -42,18 +42,6 @@ describe UsersController do
 	  end
 	end
 
-	describe "GET users#new" do
-		before(:each) { get :new }
-		it "responds successfully with an HTTP 200 status code" do
-		  expect(response).to be_success
-		  expect(response.status).to eq(200)
-		end
-
-		it "renders the new template" do
-			expect(response).to render_template :new
-		end
-	end
-
 	describe "GET users#edit" do
 		before(:each) do
 		  user = FactoryGirl.create(:user)

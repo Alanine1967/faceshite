@@ -1,0 +1,7 @@
+= form_for @user do |f|
+	.signup= f.text_field :first_name, placeholder: "First Name", class: :signup_text
+	.signup= f.text_field :surname, placeholder: "Surname", class: :signup_text
+	.signup= f.email_field :email, placeholder: "Email", class: :signup_text
+	.signup= f.password_field :password, placeholder: "Password", class: :signup_text
+	.signup= f.password_field :password_confirmation, placeholder: "Confirm password", class: :signup_text
+	.signup#signup_button= f.submit "Sign Up"

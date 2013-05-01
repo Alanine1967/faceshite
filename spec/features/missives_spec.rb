@@ -4,11 +4,10 @@ feature 'CRUD actions' do
 
 	before(:each) do
 		@missive = FactoryGirl.create(:missive)
-		visit '/'
 	end
 
 	scenario 'can create a missive with correct data' do
-		click_link 'View missives'
+		visit '/missives'
 		click_link 'Create a new missive'
 		fill_in 'Title', with: @missive.title
 		fill_in 'Content', with: @missive.content
@@ -16,7 +15,7 @@ feature 'CRUD actions' do
 	end
 
 	scenario 'cannnot create missive without content' do
-		click_link 'View missives'
+		visit '/missives'
 		click_link 'Create a new missive'
 		fill_in 'Title', with: ""
 		fill_in 'Content', with: ""
@@ -27,14 +26,14 @@ feature 'CRUD actions' do
 	end
 
 	scenario 'can list missives' do
-		click_link 'View missives'
+		visit '/missives'
 		expect(page.current_url).to eql(missives_url)
 		expect(page).to have_content @missive.title
 		expect(page).to have_content @missive.content
 	end
 
 	scenario 'can show a missive' do
-		click_link 'View missives'
+		visit '/missives'
 		click_link @missive.title
 		expect(page.current_url).to eql(missive_url(@missive))
 		expect(page).to have_content @missive.content
@@ -42,8 +41,7 @@ feature 'CRUD actions' do
 
 	scenario 'can edit a missive' do
 		login
-		visit '/'
-		click_link 'View missives'
+		visit '/missives'
 		click_link @missive.title
 		click_link 'edit'
 		expect(page.current_url).to eql(edit_missive_url(@missive))
@@ -54,7 +52,7 @@ feature 'CRUD actions' do
 	end
 
 	scenario 'can delete a missive' do
-		click_link 'View missives'
+		visit '/missives'
 		click_link @missive.title
 		click_link 'delete'
 		expect(page.current_url).to eql(missives_url)

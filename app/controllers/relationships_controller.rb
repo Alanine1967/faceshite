@@ -1,10 +1,11 @@
-class RelationshipController < ApplicationController
+class RelationshipsController < ApplicationController
+
   def create
   	@relationship = current_user.relationships.build(acquaintance_id: params[:acquaintance_id])
   	if @relationship.save
-  		redirect_to user_url(current_user), notice: "Friend added"
+  		redirect_to user_url(current_user), notice: "Acquaintance added"
   	else
-  		redirect_to root_url, notice: "Unable to add friend"
+  		render "static_pages/home"
   	end
   end
 

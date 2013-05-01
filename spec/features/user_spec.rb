@@ -24,9 +24,11 @@ feature "editing/deleting user records" do
 end
 
 feature "show users" do
-	before(:each) { @user = FactoryGirl.create(:user) }
 	scenario "show all but current user" do
+		acquaintance = FactoryGirl.create(:acquaintance)
+		login
 		visit '/users'
-		expect(page).to have_no_content(@user.surname)
+		expect(page).to have_content(acquaintance.surname)
+		expect(page).not_to have_content(@user.surname)
 	end
 end
