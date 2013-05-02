@@ -33,13 +33,6 @@ describe UsersController do
 	  	get :index
 	  	expect(response).to render_template "index"
 	  end
-
-	  it "assigns @users" do
-	  	User.all.each { |user| user.delete }
-	    user1, user2 = FactoryGirl.create(:user), FactoryGirl.create(:user)
-	    get :index
-	    assigns(:users).should eq([user1, user2])
-	  end
 	end
 
 	describe "GET users#edit" do

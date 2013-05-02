@@ -3,10 +3,12 @@ class UsersController < ApplicationController
 
 	def show
 		@acquaintances = @user.acquaintances
+		@user.inverse_acquaintances.each { |user| @acquaintances << user }
 	end
 
 	def index
-		@users = User.where.not(id: current_user)
+		@strangers = []
+		strangers.each { |stranger| @strangers << stranger unless known?(stranger) }
 	end
 
 	def new
@@ -17,7 +19,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 		if @user.save
 			session[:user_id] = @user.id
-			redirect_to user_url(@user), notice: "Thank you for signing up!"
+			redirect_to @user, notice: "Thank you for signing up!"
 		else
 			render 'static_pages/home'
 		end
@@ -49,5 +51,13 @@ class UsersController < ApplicationController
 			@user = User.find(params[:id])
 			rescue ActiveRecord::RecordNotFound
 				redirect_to users_url, alert: "User not found"
+		end
+
+		def strangers
+			User.where.not(id: current_user)
+		end
+
+		def known?(user)
+			current_user.acquaintances.include?(user)
 		end
 end

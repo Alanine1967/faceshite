@@ -1,18 +1,26 @@
 class RelationshipsController < ApplicationController
+	before_filter :find_relationships
 
 	def index
-		@acquaintances = current_user.acquaintances
 	end
 
   def create
-  	@relationship = current_user.relationships.build(acquaintance_id: params[:acquaintance_id])
-  	if @relationship.save
-  		redirect_to user_url(current_user), notice: "Acquaintance added"
+  	relationship = @relationships.build(acquaintance_id: params[:acquaintance_id])
+  	if relationship.save
+  		redirect_to users_url, notice: "Acquaintance added"
   	else
   		render "static_pages/home"
   	end
   end
 
   def destroy
+  	relationship = @relationships.find(params[:id])
+  	relationship.destroy
+  	redirect_to users_url, notice: "Acquaintance removed"
   end
+
+  private
+  	def find_relationships
+  		@relationships ||= current_user.relationships
+  	end
 end

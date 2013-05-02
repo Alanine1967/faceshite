@@ -1,4 +1,5 @@
 %h1 Acquaintances
-= link_to "back", user_path(current_user)
-- @acquaintances.each do |acquaintance|
-	= "#{acquaintance.first_name} #{acquaintance.surname}"
+= link_to "back", current_user
+- @relationships.each do |relationship|
+	= relationship.acquaintance.fullname
+	= link_to "delete acquaintance", relationship, method: :delete

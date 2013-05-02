@@ -17,5 +17,12 @@ module Features
 			fill_in 'password', with: @user.password
 			click_button 'Log In'
 		end
+
+		def alternate_login
+			visit '/'
+			fill_in 'email', with: @acquaintance.email
+			fill_in 'password', with: @acquaintance.password
+			click_button 'Log In'
+		end
 	end
 end

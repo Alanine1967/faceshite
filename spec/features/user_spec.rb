@@ -34,24 +34,28 @@ feature "index users" do
 end
 
 feature "show user" do
-	scenario "acquaintances should be displayed" do
-		acquaintance = FactoryGirl.create(:acquaintance)
+	before(:each) do
+		@acquaintance = FactoryGirl.create(:acquaintance)
 		login
 		visit '/users'
 		click_link 'Add as an acquaintance'
 		visit user_path(@user)
+	end
+
+	scenario "acquaintances should be displayed" do
 		expect(page).to have_content "you have 1 acquaintance"
 	end
 
-	scenario "acquaintance count link should link to a least of acquaintances" do
-		acquaintance = FactoryGirl.create(:acquaintance)
-		login
-		visit '/users'
-		click_link 'Add as an acquaintance'
-		visit user_path(@user)
+	scenario "reverse_acquaintances should be displayed" do
+		click_link "Log Out"
+		alternate_login
+		expect(page).to have_content "you have 1 acquaintance"
+	end
+
+	scenario "acquaintance count link should link to a list of acquaintances" do
 		click_link "you have 1 acquaintance"
 		expect(current_path).to eql relationships_path
-		expect(page).to have_content acquaintance.surname
+		expect(page).to have_content @acquaintance.surname
 		click_link "back"
 		expect(current_path).to eql user_path(@user)
 	end

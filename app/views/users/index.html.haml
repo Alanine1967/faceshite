@@ -1,5 +1,5 @@
-%h1 List all Users
+%h1 Potential Acquaintances
 
-- @users.each do |user|
-	= link_to "#{user.first_name} #{user.surname}", user_path(user)
-	= link_to "Add as an acquaintance", relationships_path(acquaintance_id: user), method: :post
+- @strangers.each do |stranger|
+	= link_to "#{stranger.fullname}", user_path(stranger)
+	= link_to "Add as an acquaintance", relationships_path(acquaintance_id: stranger), method: :post
