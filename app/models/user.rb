@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
 																foreign_key: "acquaintance_id"
 	has_many :inverse_acquaintances, through: :inverse_relationships, source: :user
 
+	has_many :missives
 
  	def fullname
  		"#{first_name} #{surname}"

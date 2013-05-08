@@ -1,4 +1,4 @@
 %h1= @missive.title
 = @missive.content
 = link_to 'edit', edit_missive_path(@missive)
-= link_to 'delete', missive_path(@missive), method: :delete, data: { confirm: "Are you sure" }
+= link_to 'delete', @missive, method: :delete, data: { confirm: "Are you sure" }

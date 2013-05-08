@@ -6,17 +6,17 @@ class MissivesController < ApplicationController
 	end
 
 	def index
-		@missives = Missive.all
+		@missives = current_user.missives
 	end
 
 	def new
-		@missive = Missive.new
+		@missive = current_user.missives.new
 	end
 
 	def create
-		@missive = Missive.new(missive_params)
+		@missive = current_user.missives.new(missive_params)
 		if @missive.save
-			redirect_to @missive, notice: "Missive created!"
+			redirect_to current_user, notice: "Missive created!"
 		else
 			render "new"
 		end
@@ -35,7 +35,7 @@ class MissivesController < ApplicationController
 
 	def destroy
 		@missive.destroy
-		redirect_to missives_url, notice: "Missive deleted!"
+		redirect_to user_missives_url(current_user), notice: "Missive deleted!"
 	end
 
 	private
@@ -44,8 +44,8 @@ class MissivesController < ApplicationController
 		end
 
 		def find_missive
-			@missive = Missive.find(params[:id])
+			@missive = current_user.missives.find(params[:id])
 			rescue ActiveRecord::RecordNotFound
-				redirect_to missives_url, alert: "Missive not found"
+				redirect_to user_missives_url(current_user), alert: "Missive not found"
 		end
 end

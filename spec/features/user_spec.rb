@@ -7,7 +7,7 @@ feature "editing/deleting user records" do
 	end
 
 	scenario "edit a user record" do
-		click_link "Edit"
+		click_link "change your details"
 		expect(current_path).to eql edit_user_path(@user)
 		fill_in "Surname", with: "Tebbit"
 		fill_in "Password", with: @user.password
@@ -58,5 +58,9 @@ feature "show user" do
 		expect(page).to have_content @acquaintance.surname
 		click_link "back"
 		expect(current_path).to eql user_path(@user)
+	end
+
+	scenario "user page displays the user's missives" do
+		pending
 	end
 end

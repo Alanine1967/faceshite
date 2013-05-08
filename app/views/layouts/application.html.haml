@@ -7,10 +7,11 @@
 		= csrf_meta_tags
 	%body
 		%header
-			%h1 faceshite
+			#main_title faceshite
 		%section
-			- flash.each do |key, value|
-				.flash= value
+			#messages
+				- flash.each do |key, value|
+					.flash= value
 			= yield
 		%footer
 			%p some footer text

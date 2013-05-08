@@ -1,4 +1,4 @@
 - @missives.each do |missive|
-	= link_to missive.title, missive_path(missive)
+	= link_to missive.title, user_missive_path(current_user, missive)
 	= missive.content
-= link_to "Create a new missive", new_missive_path
+= link_to "Create a new missive", new_user_missive_path(current_user)

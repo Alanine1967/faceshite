@@ -1,10 +1,11 @@
-%h1 User Details
-= "First name: #{@user.first_name}"
-= "Surname: #{@user.surname}"
-= "Email: #{@user.email}"
-= link_to "Edit", edit_user_path(@user)
-= link_to "Delete", user_path(@user), method: :delete, data: { confirm: "Are you sure? "}
-= link_to "Log Out", session_path(current_user), method: :delete, data: { confirm: "Are you sure?" }
+#user
+	.greeting= "You again #{@user.first_name}?"
+	.link= link_to "change your details", edit_user_path(@user)
+	.link= link_to "Delete", user_path(@user), method: :delete, data: { confirm: "Are you sure? " }
+	.link= link_to "Log Out", session_path(current_user), method: :delete
+	.link= link_to "you have #{pluralize(@acquaintances.count, 'acquaintance')}", relationships_path
 
-%h2 Acquaintances
-= link_to "you have #{pluralize(@acquaintances.count, 'acquaintance')}", relationships_path
+#missives
+	%h2 Who loves you baby?
+	- @user.missives.each do |missive|
+		.missive= link_to missive.title, missive_path(missive)

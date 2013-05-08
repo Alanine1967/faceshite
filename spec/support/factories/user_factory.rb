@@ -14,4 +14,10 @@ FactoryGirl.define do
 		password "password"
 		password_confirmation "password"
 	end
+
+	factory :missive do
+		title "Some title."
+		content "Some content."
+		user
+	end
 end

@@ -31,4 +31,11 @@ feature "Managing acquaintances" do
 		expect { click_link 'delete acquaintance' }.to change(Relationship, :count).by(-1)
 		expect(current_path).to eql users_path
 	end
+
+	scenario "can remove an inverse acquaintance" do
+		@acquaintance.inverse_relationships.create(user_id: @user.id)
+		visit relationships_path
+		expect { click_link 'delete acquaintance' }.to change(Relationship, :count).by(-1)
+		expect(current_path).to eql users_path
+	end
 end

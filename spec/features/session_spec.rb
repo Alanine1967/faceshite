@@ -3,16 +3,23 @@ require 'spec_helper'
 
 feature "login/logout" do
 
+	scenario "log in a user" do
+		user = FactoryGirl.create(:user)
+		visit '/'
+		fill_in 'email', with: user.email
+		fill_in 'password', with: user.password
+		click_button 'Log In'
+		expect(current_path).to eql user_path(user)
+	end
+
 	scenario "displays the user's email after successful login" do
 		login
 		expect(current_path).to eql user_path(@user)
-		expect(page).to have_content @user.email
 	end
 
 	scenario "logged in user should be able to logout" do
 		login
 		click_link "Log Out"
 		expect(current_path).to eql root_path
-		expect(page).to have_content "Logged out!"
 	end
 end
