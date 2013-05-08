@@ -19,7 +19,7 @@ feature "login/logout" do
 
 	scenario "logged in user should be able to logout" do
 		login
-		click_link "Log Out"
+		click_link "log out"
 		expect(current_path).to eql root_path
 	end
 end

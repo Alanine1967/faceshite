@@ -7,7 +7,7 @@ class RelationshipsController < ApplicationController
   def create
   	relationship = @relationships.build(acquaintance_id: params[:acquaintance_id])
   	if relationship.save
-  		redirect_to users_url, notice: "Acquaintance added"
+  		redirect_to user_url(current_user)
   	else
   		render "static_pages/home"
   	end

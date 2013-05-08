@@ -1,5 +1,7 @@
-%h1 Acquaintances
 = link_to "back", current_user
+%h1 No more
 - @relationships.each do |relationship|
-	= relationship.acquaintance.fullname
-	= link_to "delete acquaintance", relationship, method: :delete
+	#possible_acquaintance
+		= relationship.acquaintance.fullname
+		= link_to "send a missive", new_user_missive_path(current_user)
+		= link_to "delete acquaintance", relationship, method: :delete

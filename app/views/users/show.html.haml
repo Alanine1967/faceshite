@@ -1,11 +1,16 @@
+= provide(:title, @user.first_name)
 #user
-	.greeting= "You again #{@user.first_name}?"
+	.greeting= "#{greeting} #{@user.first_name}?"
 	.link= link_to "change your details", edit_user_path(@user)
-	.link= link_to "Delete", user_path(@user), method: :delete, data: { confirm: "Are you sure? " }
-	.link= link_to "Log Out", session_path(current_user), method: :delete
+	.link= link_to "log out", session_path(current_user), method: :delete
+	.link= link_to "or leave forever!", user_path(@user), method: :delete
+
+#acquaintances
 	.link= link_to "you have #{pluralize(@acquaintances.count, 'acquaintance')}", relationships_path
+	.link= link_to "find a new acquaintance", users_path
 
 #missives
 	%h2 Who loves you baby?
 	- @user.missives.each do |missive|
 		.missive= link_to missive.title, missive_path(missive)
+		= missive.content

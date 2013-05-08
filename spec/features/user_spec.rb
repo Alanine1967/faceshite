@@ -19,7 +19,7 @@ feature "editing/deleting user records" do
 	end
 
 	scenario "delete a user record" do
-		expect { click_link "Delete" }.to change(User, :count).by(-1)
+		expect { click_link "or leave forever!" }.to change(User, :count).by(-1)
 	end
 end
 
@@ -47,7 +47,7 @@ feature "show user" do
 	end
 
 	scenario "reverse_acquaintances should be displayed" do
-		click_link "Log Out"
+		click_link "log out"
 		alternate_login
 		expect(page).to have_content "you have 1 acquaintance"
 	end
@@ -60,7 +60,7 @@ feature "show user" do
 		expect(current_path).to eql user_path(@user)
 	end
 
-	scenario "user page displays the user's missives" do
-		pending
+	scenario "displays the user's missives" do
+		create_missive
 	end
 end

@@ -53,6 +53,12 @@ class UsersController < ApplicationController
 				redirect_to users_url, alert: "User not found"
 		end
 
+		def greeting
+			greetings = ["You again", "What's the point", "Why are you bothering"]
+			greetings.sample
+		end
+		helper_method :greeting
+
 		def strangers
 			User.where.not(id: current_user)
 		end

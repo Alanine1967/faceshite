@@ -7,9 +7,9 @@ feature "Managing acquaintances" do
 	end
 
 	scenario "can add an acquaintance" do
-		visit '/users'
+		click_link 'find a new acquaintance'
 		expect { click_link 'Add as an acquaintance' }.to change(Relationship, :count).by(1)
-		expect(current_path).to eql users_path
+		expect(current_path).to eql user_path(@user)
 	end
 
 	scenario "adding an acquaintance will remove them from list of potentials" do

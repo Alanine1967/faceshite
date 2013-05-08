@@ -4,19 +4,23 @@ feature 'Handling missives' do
 
 	before(:each) do
 		login
+		@acquaintance = FactoryGirl.create(:acquaintance)
 		@missive = FactoryGirl.attributes_for(:missive)
-		visit user_missives_path(@user)
+		visit users_path
+		click_link "Add as an acquaintance"
+		click_link "you have 1 acquaintance"
 	end
 
 	scenario 'can create a missive with correct data' do
-		click_link 'Create a new missive'
+		click_link 'send a missive'
 		fill_in 'Title', with: @missive[:title]
 		fill_in 'Content', with: @missive[:content]
 		expect { click_button 'Create Missive' }.to change(Missive, :count).by(1)
+		expect(@acquaintance.missives.to_a.count).to eql 1
 	end
 
 	scenario 'cannnot create missive without content' do
-		click_link 'Create a new missive'
+		click_link 'send a missive'
 		fill_in 'Title', with: ""
 		fill_in 'Content', with: ""
 		click_button 'Create Missive'
@@ -25,7 +29,7 @@ feature 'Handling missives' do
 		expect(page).to have_content "Content can't be blank"
 	end
 
-	scenario 'a missive should be associated with a user' do
+	scenario 'should be associated with a user' do
 		create_missive
 		expect(@user.missives.to_a.count).to eql 1
 	end
