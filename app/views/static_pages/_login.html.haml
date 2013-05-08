@@ -1,7 +1,6 @@
-#login
-	= form_tag session_path do
-		#email_label= label_tag :email
-		#email_field= text_field_tag :email, params[:email]
-		#password_label= label_tag :password
-		#password_field= password_field_tag :password
-		#submit= submit_tag "Log In"
+= form_tag session_path do
+	.email.label= label_tag :email
+	.email.field= text_field_tag :email, params[:email]
+	.password.label= label_tag :password
+	.password.field= password_field_tag :password
+	#submit.field= submit_tag "Log In"

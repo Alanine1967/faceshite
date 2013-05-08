@@ -2,10 +2,11 @@
 = render "static_pages/login"
 #wrap
 	#main
-		%h2 Faceshite doesn't want to have anything to do with you.
+		%h2 Faceshite has no need for you!
+		#welcome_image=image_tag 'GettyImages_78814284.jpg'
 	#sidebar
 		%h2 Sign up
-		%h3 if you must
+		%h3 (if you must)
 		- if @user
 			- @user.errors.full_messages.each do |msg|
 				= msg
