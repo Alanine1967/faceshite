@@ -1,6 +1,6 @@
 class MissivesController < ApplicationController
-	before_filter :find_missive, only: [:show, :edit, :update, :destroy]
-	before_filter :authorize, only: [:edit, :update]
+	before_action :find_missive, only: [:show, :edit, :update, :destroy]
+	before_action :authorize, only: [:edit, :update]
 
 	def show
 	end

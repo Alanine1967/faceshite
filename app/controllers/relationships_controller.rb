@@ -1,5 +1,5 @@
 class RelationshipsController < ApplicationController
-	before_filter :find_relationships
+	before_action :find_relationships
 
 	def index
 	end
